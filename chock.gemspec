@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Matthew Hassfurder']
   s.email       = ['sephonicus@gmail.com']
   s.homepage    = ''
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Generate interesting example text.}
+  s.description = %q{Chock is a small library used for outputting interesting example text and markup structures.}
 
   s.rubyforge_project = 'chock'
 
