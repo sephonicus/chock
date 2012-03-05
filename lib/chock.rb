@@ -1,46 +1,61 @@
 require 'chock/version'
 
 class Chock
-  CONFIG = {
-    :lorem => [
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-    ],
-    :shining => [
-      'All work and no play makes Jack a dull boy.'
-    ],
-  }
-  MODES                  = CONFIG.keys
-  DEFAULT_MODE           = MODES.first
-  DEFAULT_QUANTITY       = 1
-  DEFAULT_PARAGRAPH_SIZE = 5
+  class Generator
+    DEFAULT_QUANTITY       = 1
+    DEFAULT_PARAGRAPH_SIZE = 5
 
-  attr_reader :mode
+    @@modes = {}
+    def self.modes
+      @@modes
+    end
 
-  def self.modes
-    MODES
+    def self.inherited(subclass)
+      mode = subclass.to_s.downcase[/\w+$/].to_sym
+      modes[mode] = subclass
+    end
+
+    attr_accessor :samples
+
+    def sentences(quantity=DEFAULT_QUANTITY)
+      Array.new(quantity) { samples.sample }.join("\n")
+    end
+    alias :sentence :sentences
+
+    def paragraphs(quantity=DEFAULT_QUANTITY, paragraph_size=DEFAULT_PARAGRAPH_SIZE)
+      Array.new(quantity) do
+        Array.new(paragraph_size) { samples.sample }.join(' ')
+      end.join("\n")
+    end
+    alias :paragraph :paragraphs
   end
 
-  def initialize(options={})
-    @mode = options[:mode] || DEFAULT_MODE
-    @paragraph_size = options[:paragraph_size] || DEFAULT_PARAGRAPH_SIZE
+  class Lorem < Generator
+    def initialize
+      @samples = [
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      ]
+    end
   end
 
-  def sentences(quantity=nil)
-    quantity ||= DEFAULT_QUANTITY
-    paragraph_size = 1
-    paragraphs(quantity, paragraph_size)
+  class Shining < Generator
+    def initialize
+      @samples = ['All work and no play makes Jack a dull boy.']
+    end
   end
-  alias :sentence :sentences
 
-  def paragraphs(quantity=nil, paragraph_size=nil)
-    quantity ||= DEFAULT_QUANTITY
-    paragraph_size ||= DEFAULT_PARAGRAPH_SIZE
-    Array.new(quantity) do
-      Array.new(paragraph_size) { CONFIG[mode].sample }.join(' ')
-    end.join("\n")
+  class << self
+    def modes
+      Chock::Generator.modes.keys
+    end
+
+    Chock::Generator.modes.keys.each do |mode|
+      define_method mode do
+        Chock::Generator.modes[mode].new
+      end
+    end
   end
-  alias :paragraph :paragraphs
 end
