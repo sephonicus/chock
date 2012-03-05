@@ -42,9 +42,43 @@ class Chock
   end
 
   class Shining < Generator
+    CHARACTERS = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+
+    attr_accessor :typos
+
     def initialize
       @samples = ['All work and no play makes Jack a dull boy.']
+      @typos = [
+        # delete a random position
+        Proc.new { |t| t.sub(t[rand(t.size)], '') },
+        # replace a random position with a random character
+        Proc.new { |t| t.sub(t[rand(t.size)], CHARACTERS.sample) },
+        # uppercase a random position
+        Proc.new { |t| position = rand(t.size); t[position] = t[position].upcase; t },
+        # insert a random character at a random position
+        Proc.new { |t| t.insert(rand(t.size), CHARACTERS.sample) }
+      ]
     end
+
+    def add_typo(text)
+      if rand(4) == 0 # 25% of the time
+        typos.sample.call(text)
+      else
+        text
+      end
+    end
+
+    def sentences(quantity=DEFAULT_QUANTITY, separator="\n")
+      (1..quantity).map { add_typo(samples.sample.clone) }.join(separator)
+    end
+    alias :sentence :sentences
+
+    def paragraphs(quantity=DEFAULT_QUANTITY, paragraph_size=DEFAULT_PARAGRAPH_SIZE)
+      Array.new(quantity) do
+        sentences(paragraph_size, ' ')
+      end.join("\n")
+    end
+    alias :paragraph :paragraphs
   end
 
   class << self
