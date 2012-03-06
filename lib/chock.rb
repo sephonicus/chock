@@ -17,14 +17,14 @@ class Chock
 
     attr_accessor :samples
 
-    def sentences(quantity=DEFAULT_QUANTITY)
-      Array.new(quantity) { samples.sample }.join("\n")
+    def sentences(quantity=DEFAULT_QUANTITY, separator="\n")
+      Array.new(quantity) { samples.sample }.join(separator)
     end
     alias :sentence :sentences
 
     def paragraphs(quantity=DEFAULT_QUANTITY, paragraph_size=DEFAULT_PARAGRAPH_SIZE)
       Array.new(quantity) do
-        Array.new(paragraph_size) { samples.sample }.join(' ')
+        sentences(paragraph_size, ' ')
       end.join("\n")
     end
     alias :paragraph :paragraphs
@@ -72,13 +72,6 @@ class Chock
       (1..quantity).map { add_typo(samples.sample.clone) }.join(separator)
     end
     alias :sentence :sentences
-
-    def paragraphs(quantity=DEFAULT_QUANTITY, paragraph_size=DEFAULT_PARAGRAPH_SIZE)
-      Array.new(quantity) do
-        sentences(paragraph_size, ' ')
-      end.join("\n")
-    end
-    alias :paragraph :paragraphs
   end
 
   class << self
