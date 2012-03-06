@@ -17,8 +17,12 @@ class Chock
 
     attr_accessor :samples
 
-    def sentences(quantity=DEFAULT_QUANTITY, separator="\n")
-      Array.new(quantity) { samples.sample }.join(separator)
+    def sentences(quantity=nil, separator=nil, &block)
+      quantity  ||= DEFAULT_QUANTITY
+      separator ||= "\n"
+      Array.new(quantity).map do
+        block ? yield : samples.sample
+      end.join(separator)
     end
     alias :sentence :sentences
 
@@ -65,8 +69,8 @@ class Chock
       rand(4) == 0 ? typos.sample.call(text) : text
     end
 
-    def sentences(quantity=DEFAULT_QUANTITY, separator="\n")
-      (1..quantity).map { add_typo(samples.sample.clone) }.join(separator)
+    def sentences(quantity=nil, separator=nil)
+      super(quantity, separator) { add_typo(samples.sample.clone) }
     end
     alias :sentence :sentences
   end
