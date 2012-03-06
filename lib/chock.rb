@@ -61,6 +61,7 @@ class Chock
     end
 
     def add_typo(text)
+      # only add a typo 25% of the time
       rand(4) == 0 ? typos.sample.call(text) : text
     end
 
