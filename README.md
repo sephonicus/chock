@@ -23,14 +23,17 @@ puts shining.paragraphs(2)
 
 ## Modes
 
-# Lorem
+### Lorem
 
 The text sample we all know and love. See [lipsum.com](http://www.lipsum.com/) to learn more about it than you probably care to.
 
-# Shining
+### Shining
 
 Inspired by [this scene](http://www.youtube.com/watch?v=NgMdz2fe0CY) from Kubrick's classic. A smattering of random typographical errors are thrown in to more closely fit the movie versions. Various page formattings are in the works.
 
 ## WIP
 
-More complicated formattings, markup structures, generators for famous authors, other interesting text samples.
+- more complex formattings
+- markup structures
+- generators patterned after famous authors
+- other interesting text samples
