@@ -13,9 +13,10 @@ require 'chock'
 
 Chock.modes
 
-ipsum = Chock.new
-ipsum.sentence
+puts Chock.lorem.sentences(5)
+puts Chock.lorem.paragraph
 
-shining = Chock.new(:mode => :shining)
-shining.paragraphs(2)
+shining = Chock.shining
+puts shining.sentence
+puts shining.paragraphs(2)
 ```
