@@ -33,7 +33,7 @@ Inspired by [this scene](http://www.youtube.com/watch?v=NgMdz2fe0CY) from Kubric
 
 ## WIP
 
-- more complex formattings
 - markup structures
-- generators patterned after famous authors
-- other interesting text samples
+- more complex formattings
+- more generators
+- binary for CLI output
