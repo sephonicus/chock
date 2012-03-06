@@ -77,12 +77,12 @@ class Chock
 
   class << self
     def modes
-      Chock::Generator.modes.keys
+      Generator.modes.keys
     end
 
-    Chock::Generator.modes.keys.each do |mode|
+    Generator.modes.keys.each do |mode|
       define_method mode do
-        Chock::Generator.modes[mode].new
+        Generator.modes[mode].new
       end
     end
   end
