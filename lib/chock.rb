@@ -61,11 +61,7 @@ class Chock
     end
 
     def add_typo(text)
-      if rand(4) == 0 # 25% of the time
-        typos.sample.call(text)
-      else
-        text
-      end
+      rand(4) == 0 ? typos.sample.call(text) : text
     end
 
     def sentences(quantity=DEFAULT_QUANTITY, separator="\n")
