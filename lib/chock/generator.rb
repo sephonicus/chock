@@ -2,6 +2,7 @@ class Chock
   class Generator
     DEFAULT_QUANTITY       = 1
     DEFAULT_PARAGRAPH_SIZE = 5
+    DEFAULT_LIST_LENGTH    = 3
 
     @@modes = {}
     def self.modes
@@ -36,5 +37,20 @@ class Chock
         "<h#{number}>#{sentence}</h#{number}>"
       end
     end
+
+    def list(items=DEFAULT_LIST_LENGTH, ordered=false)
+      components = ordered ? %w[<ol> </ol>] : %w[<ul> </ul>]
+      items.times { components[1, 0] = "<li>#{sentence}</li>" }
+      components.join
+    end
+
+    def ol(items=DEFAULT_LIST_LENGTH)
+      list(items, true)
+    end
+
+    def ul(items=DEFAULT_LIST_LENGTH)
+      list(items, false)
+    end
+
   end
 end
