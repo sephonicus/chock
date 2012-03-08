@@ -30,5 +30,11 @@ class Chock
       end.join("\n")
     end
     alias :paragraph :paragraphs
+
+    (1..6).each do |number|
+      define_method(:"h#{number}") do
+        "<h#{number}>#{sentence}</h#{number}>"
+      end
+    end
   end
 end
