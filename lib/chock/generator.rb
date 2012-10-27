@@ -6,6 +6,13 @@ class Chock
 
     NEWLINE = "\n"
 
+    PARAGRAPH_SIZES = {
+      :tiny    => 1,
+      :small   => 3,
+      :medium  => 5,
+      :large   => 10,
+    }
+
     @@modes = {}
     def self.modes
       @@modes
@@ -31,6 +38,16 @@ class Chock
       end.join(NEWLINE)
     end
     alias :paragraph :paragraphs
+
+    def p(size=:default)
+      ['<p>', paragraph(1, PARAGRAPH_SIZES[size]), '</p>'].join(NEWLINE) + NEWLINE
+    end
+
+    PARAGRAPH_SIZES.keys.each do |size|
+      define_method(:"p_#{size}") do
+        p(size)
+      end
+    end
 
     (1..6).each do |number|
       define_method(:"h#{number}") do
