@@ -25,22 +25,35 @@ require 'chock'
 Chock.modes
 # [:lorem, :shining]
 
-puts Chock.lorem.sentences(3)
+Chock.lorem.sentences(3)
 # Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...
 # Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...
 # Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea...
 
-puts Chock.lorem.paragraph
+Chock.lorem.paragraph
 # Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat...
 
 shining = Chock.shining
 
-puts shining.sentence
+shining.sentence
 # All work nd no play makes Jack a dull boy.
 
-puts shining.paragraphs(2)
+shining.paragraphs(2)
 # All work and no play makes Jack a dull boy. All work and no play makEs Jack a dull boy...
 # Al work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy...
+
+shining.p_tiny # or p_small, p_medium, p_large
+# <p>All work and no play makes Jack a dull boy.</p>
+
+shining.h1 # or h2-h6
+# <h1>All work and no play makes Jack a dull boy.</h1>
+
+shining.ol # or ul
+# <ol>
+# <li>All work and no play makes Jack a dull boy.</li>
+# <li>All work and no play makez Jack a dull boy.</li>
+# <li>All work and no play makes Jack a dull boy.</li>
+# </ol>
 ```
 
 ## Modes
