@@ -55,7 +55,6 @@ Inspired by [this scene](http://www.youtube.com/watch?v=NgMdz2fe0CY) from Kubric
 
 ## WIP
 
-- markup structures
 - more complex formattings
 - more generators
 - binary for CLI output
