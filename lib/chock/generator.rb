@@ -51,14 +51,14 @@ class Chock
 
     (1..6).each do |number|
       define_method(:"h#{number}") do
-        "<h#{number}>#{sentence}</h#{number}>"
+        "<h#{number}>#{sentence}</h#{number}>\n"
       end
     end
 
     def list(items=DEFAULT_LIST_LENGTH, ordered=false)
       components = ordered ? %w[<ol> </ol>] : %w[<ul> </ul>]
       items.times { components[1, 0] = "<li>#{sentence}</li>" }
-      components.join(NEWLINE)
+      components.join(NEWLINE) + NEWLINE
     end
 
     def ol(items=DEFAULT_LIST_LENGTH)
