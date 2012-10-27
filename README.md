@@ -4,7 +4,18 @@ Chock is a small library used for outputting example text and markup structures.
 
 ## Installation
 
+### Standalone
+
 `gem install chock`
+
+### Rails
+
+Add the chock gem to your project's gem manifest and bundle:
+
+```bash
+gem chock
+bundle
+```
 
 ## Usage
 
