@@ -16,8 +16,6 @@ class Chock
       modes[mode] = subclass
     end
 
-    attr_accessor :samples
-
     def sentences(quantity=nil, separator=nil, &block)
       quantity  ||= DEFAULT_QUANTITY
       separator ||= NEWLINE
