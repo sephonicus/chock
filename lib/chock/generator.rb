@@ -4,6 +4,8 @@ class Chock
     DEFAULT_PARAGRAPH_SIZE = 5
     DEFAULT_LIST_LENGTH    = 3
 
+    NEWLINE = "\n"
+
     @@modes = {}
     def self.modes
       @@modes
@@ -18,7 +20,7 @@ class Chock
 
     def sentences(quantity=nil, separator=nil, &block)
       quantity  ||= DEFAULT_QUANTITY
-      separator ||= "\n"
+      separator ||= NEWLINE
       Array.new(quantity).map do
         block ? yield : samples.sample
       end.join(separator)
@@ -28,7 +30,7 @@ class Chock
     def paragraphs(quantity=DEFAULT_QUANTITY, paragraph_size=DEFAULT_PARAGRAPH_SIZE)
       Array.new(quantity) do
         sentences(paragraph_size, ' ')
-      end.join("\n")
+      end.join(NEWLINE)
     end
     alias :paragraph :paragraphs
 
