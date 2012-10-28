@@ -10,12 +10,11 @@ Chock is a small library used for outputting example text and markup structures.
 
 ### Rails
 
-Add the chock gem to your project's gem manifest and bundle:
+Add the chock gem to your project's gem manifest:
 
-```bash
-gem chock
-bundle
-```
+`gem 'chock'`
+
+Run `bundle`
 
 ## Usage
 
